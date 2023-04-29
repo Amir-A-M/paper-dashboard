@@ -4,6 +4,7 @@ var sass = require('gulp-sass');
 var autoprefixer = require('gulp-autoprefixer');
 var sourcemaps = require('gulp-sourcemaps');
 var open = require('gulp-open');
+var rtlcss = require('gulp-rtlcss');
 
 var Paths = {
   HERE: './',
@@ -18,6 +19,15 @@ gulp.task('compile-scss', function() {
     .pipe(sourcemaps.init())
     .pipe(sass().on('error', sass.logError))
     .pipe(autoprefixer())
+    .pipe(rtlcss())
+    .pipe(sourcemaps.write(Paths.HERE))
+    .pipe(gulp.dest(Paths.CSS));
+});
+
+gulp.task('bootstrap-rtl', function() {
+  return gulp.src('./assets/css/bootstrap.min.css')
+    .pipe(sourcemaps.init())
+    .pipe(rtlcss())
     .pipe(sourcemaps.write(Paths.HERE))
     .pipe(gulp.dest(Paths.CSS));
 });
