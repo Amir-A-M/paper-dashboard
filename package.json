@@ -15,6 +15,8 @@
     "gulp-open": "^3.0.1"
   },
   "dependencies": {
+    "gulp-clean-css": "^4.3.0",
+    "gulp-rename": "^2.0.0",
     "gulp-rtlcss": "^2.0.0"
   }
 }

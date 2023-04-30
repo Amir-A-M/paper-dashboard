@@ -5,6 +5,8 @@ var autoprefixer = require('gulp-autoprefixer');
 var sourcemaps = require('gulp-sourcemaps');
 var open = require('gulp-open');
 var rtlcss = require('gulp-rtlcss');
+var rename = require('gulp-rename');
+const cleanCSS = require('gulp-clean-css');
 
 var Paths = {
   HERE: './',
@@ -20,14 +22,8 @@ gulp.task('compile-scss', function() {
     .pipe(sass().on('error', sass.logError))
     .pipe(autoprefixer())
     .pipe(rtlcss())
-    .pipe(sourcemaps.write(Paths.HERE))
-    .pipe(gulp.dest(Paths.CSS));
-});
-
-gulp.task('bootstrap-rtl', function() {
-  return gulp.src('./assets/css/bootstrap.min.css')
-    .pipe(sourcemaps.init())
-    .pipe(rtlcss())
+    .pipe(cleanCSS())
+    .pipe(rename({suffix: '.min'}))
     .pipe(sourcemaps.write(Paths.HERE))
     .pipe(gulp.dest(Paths.CSS));
 });
